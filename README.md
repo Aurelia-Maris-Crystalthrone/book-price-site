@@ -170,5 +170,4 @@ book-price-site/
 ## License
 
 MIT
-#   b o o k - p r i c e - s i t e  
- 
+#
