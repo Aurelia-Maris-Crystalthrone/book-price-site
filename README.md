@@ -51,11 +51,12 @@
 
 ### 本地运行
 
-```bash
-git clone <your-repo-url> book-price-site
-cd book-price-site
+> 本项目当前位于本机 `D:\book-price-site`，以下命令均在该目录内执行。
 
-# 1. 安装依赖（Node.js ≥ 18.18）
+```bash
+cd D:\book-price-site          # 项目所在目录（已含完整代码与依赖）
+
+# 1. 安装依赖（Node.js ≥ 18.18；首次或依赖缺失时执行）
 npm install
 
 # 2.（可选）配置平台密钥
