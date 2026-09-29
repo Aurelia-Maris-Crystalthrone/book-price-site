@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>比价书 BookPrice · 使用教程</title>
+<style>
+  :root {
+    --primary: #6a8571;
+    --primary-dark: #55705c;
+    --bg: #f8f9fa;
+    --card: #ffffff;
+    --text: #1a1d1a;
+    --muted: #6b7268;
+    --border: #e3e6e3;
+    --success: #3d8b5f;
+    --success-bg: #e8f5ee;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    padding: 24px 16px 64px;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; }
+  header.hero {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: #fff;
+    border-radius: 16px;
+    padding: 40px 32px;
+    margin-bottom: 28px;
+  }
+  header.hero h1 { font-size: 26px; margin-bottom: 8px; }
+  header.hero p { opacity: 0.92; font-size: 14px; }
+  .toc {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+  }
+  .toc h2 { font-size: 15px; margin-bottom: 10px; color: var(--primary-dark); }
+  .toc ol { padding-left: 20px; }
+  .toc a { color: var(--text); text-decoration: none; font-size: 14px; }
+  .toc a:hover { color: var(--primary); }
+  section.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  }
+  section.card h2 {
+    font-size: 19px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  section.card h2 .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px; height: 28px;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 8px;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  section.card h3 { font-size: 15px; margin: 16px 0 8px; color: var(--primary-dark); }
+  p, li { font-size: 14px; color: #333; }
+  p { margin-bottom: 10px; }
+  ul, ol { padding-left: 20px; margin-bottom: 10px; }
+  li { margin-bottom: 4px; }
+  kbd {
+    background: #f0f1f0;
+    border: 1px solid #d4d8d4;
+    border-bottom-width: 2px;
+    border-radius: 5px;
+    padding: 1px 7px;
+    font-size: 12px;
+    font-family: inherit;
+  }
+  code {
+    background: #f0f1f0;
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-size: 13px;
+    font-family: Consolas, monospace;
+  }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+  th, td { border: 1px solid var(--border); padding: 8px 12px; text-align: left; }
+  th { background: #f0f2f0; font-weight: 600; }
+  tr:nth-child(even) td { background: #fafbfa; }
+  .tip {
+    background: var(--success-bg);
+    border-left: 3px solid var(--success);
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    margin: 12px 0;
+    font-size: 13px;
+  }
+  .tip b { color: var(--success); }
+  .warn {
+    background: #fdf6e8;
+    border-left: 3px solid #d9a03c;
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    margin: 12px 0;
+    font-size: 13px;
+  }
+  pre.ascii {
+    background: #232823;
+    color: #c9d6cc;
+    border-radius: 10px;
+    padding: 18px;
+    overflow-x: auto;
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 12px 0;
+    font-family: Consolas, "Courier New", monospace;
+  }
+  .banner-demo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--success-bg);
+    border: 2px solid var(--success);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin: 12px 0;
+  }
+  .banner-demo .crown {
+    width: 44px; height: 44px;
+    background: var(--success);
+    color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .banner-demo .price { font-size: 26px; font-weight: 800; color: var(--success); }
+  .banner-demo .at { font-size: 13px; color: var(--muted); }
+  .banner-demo .btn {
+    margin-left: auto;
+    background: var(--success);
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .flow { list-style: none; padding: 0; margin: 14px 0; }
+  .flow li {
+    background: #f4f6f4;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+  }
+  .flow .step-n {
+    color: var(--primary);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 32px;
+  }
+  @media (max-width: 640px) {
+    section.card { padding: 20px 16px; }
+    .banner-demo { flex-wrap: wrap; }
+    .banner-demo .btn { margin-left: 0; width: 100%; text-align: center; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1>📚 比价书 BookPrice · 使用教程</h1>
+    <p>买书之前，先比个价 —— 从输入一本书，到找到全网最低价的完整指南</p>
+  </header>
+
+  <nav class="toc">
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#s1">界面总览</a></li>
+      <li><a href="#s2">第一步：搜索一本书</a></li>
+      <li><a href="#s3">第二步：确认目标书籍</a></li>
+      <li><a href="#s4">第三步：阅读比价结果</a></li>
+      <li><a href="#s5">价格趋势图</a></li>
+      <li><a href="#s6">暗色模式与快捷键</a></li>
+      <li><a href="#s7">常见问题</a></li>
+    </ol>
+  </nav>
+
+  <section class="card" id="s1">
+    <h2><span class="num">1</span>界面总览</h2>
+    <p>打开网站后，页面从上到下分为四个区域：</p>
+    <pre class="ascii">┌─────────────────────────────────────────┐
+│  顶部导航栏：Logo｜GitHub｜暗色模式切换    │
+├─────────────────────────────────────────┤
+│  Hero 搜索区：大标题 + 模式Tab + 搜索框    │
+├─────────────────────────────────────────┤
+│  （搜索后出现）候选书籍区 / 比价结果面板    │
+├─────────────────────────────────────────┤
+│  页脚：免责声明 + 数据采集时间 + 版权      │
+└─────────────────────────────────────────┘</pre>
+  </section>
+
+  <section class="card" id="s2">
+    <h2><span class="num">2</span>第一步：搜索一本书</h2>
+    <p>网站提供 <b>三种搜索模式</b>，点击 Tab 切换：</p>
+
+    <h3>模式 1：智能搜索（最常用）</h3>
+    <p>一个输入框搞定一切，系统自动识别你输入的是书名、作者还是 ISBN：</p>
+    <ul>
+      <li>输入 <code>算法导论</code> → 按书名搜索</li>
+      <li>输入 <code>周志华</code> → 按作者搜索</li>
+      <li>输入 <code>9787111407010</code> → 按 ISBN 精确查询</li>
+    </ul>
+    <p><b>自动补全</b>：输入 2 个字符后，搜索框下方会弹出实时建议列表。
+    用 <kbd>↑</kbd> <kbd>↓</kbd> 选择建议，<kbd>Enter</kbd> 确认，<kbd>Esc</kbd> 关闭，鼠标点击任意建议直接搜索。</p>
+    <div class="tip"><b>小技巧</b>：试试搜索框下方的快捷示例标签（如「人类简史 赫拉利」），点一下即可体验完整流程。</div>
+
+    <h3>模式 2：ISBN 精确查询</h3>
+    <p>已知 ISBN 时使用。支持 <b>10 位或 13 位</b>，带横线也可以（如 <code>7-111-40701-6</code>），系统会自动校验格式并互转。</p>
+
+    <h3>模式 3：高级组合查询</h3>
+    <p>书太热门、重名太多时使用。分别填写 <b>书名 / 作者 / 版次</b> 任意组合，填一个即可，填得越多越精准。</p>
+  </section>
+
+  <section class="card" id="s3">
+    <h2><span class="num">3</span>第二步：确认目标书籍</h2>
+    <p>用书名/作者搜索时，通常会匹配到多本书（不同版次、不同出版社、不同译本）。网站会展示 <b>候选书籍列表</b>：</p>
+    <pre class="ascii">┌──────────┐ ┌──────────┐ ┌──────────┐
+│ 封面缩略图 │ │ 封面缩略图 │ │ 封面缩略图 │
+│ 书名      │ │ 书名      │ │ 书名      │
+│ 作者/出版社│ │ 作者/出版社│ │ 作者/出版社│
+│ 版次+ISBN │ │ 版次+ISBN │ │ 版次+ISBN │
+│[选择这本书]│ │[选择这本书]│ │[选择这本书]│
+└──────────┘ └──────────┘ └──────────┘
+     桌面 3 列 / 平板 2 列 / 手机 1 列</pre>
+    <p><b>怎么选</b>：</p>
+    <ul class="flow">
+      <li><span class="step-n">鼠标</span>点击卡片任意位置或「选择这本书」按钮</li>
+      <li><span class="step-n">键盘</span><kbd>↑</kbd> <kbd>↓</kbd> 在卡片间移动（高亮项带绿色描边），<kbd>Enter</kbd> 确认</li>
+      <li><span class="step-n">折叠</span>超过 6 本时列表自动折叠，点「展开其余 N 本」查看全部</li>
+    </ul>
+    <div class="warn"><b>为什么要人工确认？</b>「算法导论 第3版」和「第4版」是两本不同的书，价格不可比。这一步帮你锁定唯一版本（以 ISBN-13 为准）。</div>
+  </section>
+
+  <section class="card" id="s4">
+    <h2><span class="num">4</span>第三步：阅读比价结果</h2>
+    <p>确认书籍后，系统 <b>同时向 7 个平台发起查询</b>，结果面板从上到下：</p>
+
+    <h3>最低价横幅（绿色高亮）</h3>
+    <div class="banner-demo">
+      <span class="crown">👑</span>
+      <div>
+        <span class="price">¥25.00</span>
+        <span class="at">全网最低 @ 孔夫子旧书网 · 某某书店 · 品相九五新</span>
+      </div>
+      <span class="btn">去购买 →</span>
+    </div>
+
+    <h3>平台结果卡片</h3>
+    <table>
+      <tr><th>元素</th><th>说明</th></tr>
+      <tr><td>平台名</td><td>孔夫子 / 闲鱼 / 京东 / 有路 / 淘宝 / 多抓鱼 / 小谷吖</td></tr>
+      <tr><td>价格</td><td>大号加粗；最低价额外带绿框 +「最低价」徽章</td></tr>
+      <tr><td>品相</td><td>全新 / 九五新 / 九品 / 八品 / 二手良好等</td></tr>
+      <tr><td>「去购买」</td><td>新标签页打开平台商品页</td></tr>
+    </table>
+    <p><b>两类特殊卡片</b>：</p>
+    <ul>
+      <li><b>灰色「前往搜索」卡</b>：淘宝/多抓鱼/小谷吖没有公开 API，卡片生成跳转到该平台搜索页的链接，方便人工比对</li>
+      <li><b>灰色「暂时不可用」卡</b>：该平台查询失败或未配置密钥，不影响其他平台</li>
+    </ul>
+
+    <h3>排序与筛选栏（列表顶部）</h3>
+    <table>
+      <tr><th>操作</th><th>效果</th></tr>
+      <tr><td>价格升序</td><td>默认，按价格从低到高（真实报价永远排在跳转卡前）</td></tr>
+      <tr><td>按平台</td><td>按固定平台顺序分组浏览</td></tr>
+      <tr><td>全部平台 ▾</td><td>只看某个平台</td></tr>
+      <tr><td>全部品相 ▾</td><td>只看全新 / 只看二手</td></tr>
+    </table>
+  </section>
+
+  <section class="card" id="s5">
+    <h2><span class="num">5</span>价格趋势图</h2>
+    <p>结果面板最下方是 <b>历史价格折线图</b>（Recharts 渲染）：</p>
+    <ul>
+      <li>横轴 = 时间，纵轴 = 价格（元）；每个平台一条固定颜色的线</li>
+      <li><b>点击图例</b>可显示/隐藏对应平台（再点一次恢复）</li>
+      <li>鼠标悬停图表可查看该时间点各平台的具体价格</li>
+    </ul>
+    <div class="tip"><b>数据从哪来？</b>每次搜索自动记录到本地 SQLite。首次查询会提示「暂无历史数据」——同一本书多查几遍、隔几天再查，折线就会逐渐长出来，即可看出价格走势与最稳定的低价平台。</div>
+  </section>
+
+  <section class="card" id="s6">
+    <h2><span class="num">6</span>暗色模式与快捷键</h2>
+    <p>点顶部导航栏右侧的 🌙 图标切换深色主题（背景 <code>#1a1d1a</code>），偏好会被记住。</p>
+    <table>
+      <tr><th>按键</th><th>位置</th><th>作用</th></tr>
+      <tr><td><kbd>↑</kbd> <kbd>↓</kbd></td><td>搜索框</td><td>选择自动补全建议</td></tr>
+      <tr><td><kbd>↑</kbd> <kbd>↓</kbd></td><td>候选列表</td><td>在候选书籍间移动高亮</td></tr>
+      <tr><td><kbd>Enter</kbd></td><td>搜索框</td><td>搜索（或确认选中的建议）</td></tr>
+      <tr><td><kbd>Enter</kbd></td><td>候选列表</td><td>确认高亮的书并开始比价</td></tr>
+      <tr><td><kbd>Esc</kbd></td><td>搜索框</td><td>关闭补全下拉</td></tr>
+    </table>
+    <p><b>移动端</b>：手机浏览器打开即用——卡片自动单列、搜索栏占满宽度、触点加大单手可操作。</p>
+  </section>
+
+  <section class="card" id="s7">
+    <h2><span class="num">7</span>常见问题</h2>
+    <table>
+      <tr><th>问题</th><th>原因与解决办法</th></tr>
+      <tr><td>「ISBN 格式不正确」</td><td>校验位不合法，核对数字；10/13 位均支持，可带横线</td></tr>
+      <tr><td>「未找到匹配书籍」</td><td>换个关键词：书名+作者、去掉副标题、或直接用 ISBN</td></tr>
+      <tr><td>「该候选书籍缺少 ISBN」</td><td>该版本无 ISBN 记录（常见于极老的书），请选其他版本</td></tr>
+      <tr><td>某平台「暂时不可用」</td><td>平台超时/限流或未配置密钥，稍后重试，其他平台不受影响</td></tr>
+      <tr><td>趋势图「暂无历史数据」</td><td>正常现象，同一本书多搜索几次后自动积累</td></tr>
+      <tr><td>想重新搜别的书</td><td>直接在顶部搜索框输入新内容，结果区自动刷新</td></tr>
+    </table>
+  </section>
+
+  <footer>价格数据仅供参考，以平台实际结算为准 · 跳转链接均指向平台官方站点</footer>
+</div>
+</body>
+</html>
